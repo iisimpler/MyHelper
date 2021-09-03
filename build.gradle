@@ -1,0 +1,60 @@
+plugins {
+    id 'io.freefair.lombok' version '5.3.0'
+    id 'org.jetbrains.intellij' version '1.1.4'
+    id 'java'
+}
+
+group 'io.github.iisimpler.helper'
+version '0.0.3'
+
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+repositories {
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/repository/public" }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'cn.hutool:hutool-core:5.7.11'
+    implementation 'org.freemarker:freemarker:2.3.31'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+intellij {
+    version = '2021.2'
+}
+
+publishPlugin {
+    token = System.getenv("IdeaPluginPublishToken")
+}
+
+patchPluginXml {
+    changeNotes = """
+    <b>0.0.3</b>
+    <ul>
+        <li>Optimize shortcut key trigger source judgment.</li>
+        <li>Optimize code.</li>
+    </ul>
+    <b>0.0.2</b>
+    <ul>
+        <li>Support @nullAble tag when convert Domain to SQL that create table.</li>
+        <li>SaveAll automatic.</li>
+    </ul>
+    <b>0.0.1</b>
+    <ul>
+        <li>Support convert Domain to SQL that create table.</li>
+    </ul>
+    """
+}
+
+test {
+    useJUnitPlatform()
+}

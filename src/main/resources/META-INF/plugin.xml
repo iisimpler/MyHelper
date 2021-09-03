@@ -1,0 +1,82 @@
+<idea-plugin>
+    <id>io.github.iisimpler.helper.id</id>
+    <name>MyHelper</name>
+    <vendor email="iisimpler@qq.com" url="https://github.io/iisimpler/MyHelper">iisimpler</vendor>
+
+    <description><![CDATA[
+
+        <h1>MyHelper</h1>
+        Help developers on the JetBrains platform to be more efficient and fast (mainly Java at present).
+
+        <h2>Features:</h2>
+
+        <h3>Convert Domain to SQL that create table </h3>
+
+        <p>
+            When using DDD for Java development, many Domain (including more fields) are generally created as needed first, when we focus on the repository layer, we often need to create SQL for domains and fields, which is painful because it takes double time.
+        </p>
+
+        <br/>
+        <p>If you want to complete this job more efficient, this plugin can help you.</p>
+        <br/>
+        <p>
+            "Copy Table SQL (ctrl shift C)" will appear in the right-click menu of editor and project View.
+        </p>
+        <br/>
+        <p>Minimize configuration，you just need to add the @table tag (tag value is not required) to your domain header comment, and it is recommended to configure @length tags for String Type Fields. MyHelper will infer all other relevant information intelligently.</p>
+
+        <br/>
+        <b>Type conversion inference: </b>
+        <ul>
+            <li>Java Type -> MySQL Type</li>
+            <li>String -> varchar, varchar(20) if @length tag is not specified</li>
+            <li>BigDecimal -> decimal, decimal(20, 4) if @length tag is not specified</li>
+            <li>int -> int</li>
+            <li>Integer -> int</li>
+            <li>long -> bigint</li>
+            <li>Long -> bigint</li>
+            <li>Boolean -> tinyint(1)</li>
+            <li>enum -> tinyint(2)</li>
+            <li>Date -> datetime</li>
+            <li>LocalDate -> date</li>
+            <li>LocalDateTime -> datetime</li>
+        </ul>
+        <br/>
+        <b>Tags: </b>
+        <ul>
+            <li>@table [table_name] </li>
+            <li>@primaryKey [true] => Please configure @primaryKey tag when your primary key name is not called id.</li>
+            <li>@unique [true] => Create a unique index based on the name field</li>
+            <li>@index [true] => Will create an index based on the name field</li>
+            <li>@length 50 => default 20, This will become the length for name filed, means varchar(50)</li>
+            <li>@dbType varchar(100) => specify data type directly</li>
+            <li>@defaultVal 'tom' => Indicates that the default value is Tom</li>
+            <li>@nullAble [true] => Indicates that the name field can be null</li>
+        </ul>
+        <br/>
+        <p>
+            <b>
+                <a href="https://github.com/iisimpler/MyHelper">Github</a> | <a href='https://github.com/iisimpler/MyHelper/blob/master/src/test/java/Demo.java'>Demo</p>
+            </b>
+        </p>
+
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="MyHelper.Notify" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="MyHelper.CopyTableAction"
+                text="Copy Table SQL"
+                icon="AllIcons.Actions.Copy"
+                class="io.github.iisimpler.helper.action.CopyTableAction">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift meta C"/>
+            <add-to-group group-id="EditorPopupMenu" relative-to-action="$Copy" anchor="after"/>
+            <add-to-group group-id="CutCopyPasteGroup" relative-to-action="$Copy" anchor="after"/>
+        </action>
+    </actions>
+
+</idea-plugin>
