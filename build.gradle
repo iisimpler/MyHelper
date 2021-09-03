@@ -29,7 +29,7 @@ dependencies {
 }
 
 intellij {
-    version = '2021.2'
+    version = '2021.2.1'
 }
 
 publishPlugin {
