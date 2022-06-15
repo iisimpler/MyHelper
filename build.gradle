@@ -1,11 +1,11 @@
 plugins {
     id 'io.freefair.lombok' version '5.3.0'
-    id 'org.jetbrains.intellij' version '1.1.4'
+    id 'org.jetbrains.intellij' version '1.6.0'
     id 'java'
 }
 
 group 'io.github.iisimpler.helper'
-version '0.0.3'
+version '0.0.5'
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.thoughtworks.qdox:qdox:2.0.1'
     implementation 'cn.hutool:hutool-core:5.7.11'
     implementation 'org.freemarker:freemarker:2.3.31'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
@@ -29,7 +30,7 @@ dependencies {
 }
 
 intellij {
-    version = '2021.2.1'
+    version = '2022.1.1'
 }
 
 publishPlugin {
@@ -38,6 +39,14 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+    <b>0.0.5</b>
+    <ul>
+        <li>Adaptation to idea 2022.1.1 </li>
+    </ul>
+    <b>0.0.4</b>
+    <ul>
+        <li>Adaptation to idea 2021.3.x </li>
+    </ul>
     <b>0.0.3</b>
     <ul>
         <li>Optimize shortcut key trigger source judgment.</li>
