@@ -39,6 +39,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+    <b>0.0.6</b>
+    <ul>
+        <li>Adaptation to idea 2026.1 </li>
+    </ul>
     <b>0.0.5</b>
     <ul>
         <li>Adaptation to idea 2022.1.1 </li>
